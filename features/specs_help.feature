@@ -1,10 +1,8 @@
 Feature: Specs help
 
+  @no-clobber
   Scenario: View the hew:specs generator description
-    When I run `rails new . --skip-spring`
-    And I append to "Gemfile" with "gem 'hew', path: '../..'"
-    And I run `bundle install`
-    And I run `rails generate hew:specs --help`
+    When I run `rails generate hew:specs --help`
     Then the output should contain:
       """
       Usage:
