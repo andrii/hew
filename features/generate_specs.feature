@@ -1,7 +1,7 @@
 @no-clobber
 Feature: Generate specs
 
-  Scenario: Generate RSpec feature specs
+  Scenario: Generate specs with no arguments
     When I run `rails generate hew:specs post`
     Then the output should contain:
       """
