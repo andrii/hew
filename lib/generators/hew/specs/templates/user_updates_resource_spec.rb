@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.feature 'User updates a post' do
+RSpec.feature 'User updates a post' do
   scenario 'post exists' do
     visit '/posts'
 

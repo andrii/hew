@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.feature 'User deletes a post' do
+RSpec.feature 'User deletes a post' do
   scenario 'post exists' do
     visit '/posts'
 
