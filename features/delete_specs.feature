@@ -2,8 +2,8 @@
 Feature: Delete specs
 
   Scenario: Delete generated specs
-    Given I run `rails generate hew:specs purchase`
-    When I run `rails destroy hew:specs purchase`
+    Given I run `rails generate hew purchase`
+    When I run `rails destroy hew purchase`
     Then the output should contain:
       """
             remove  spec/features/user_views_purchases_spec.rb

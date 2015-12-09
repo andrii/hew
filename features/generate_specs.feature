@@ -2,7 +2,7 @@
 Feature: Generate specs
 
   Scenario: Generate specs with no fields
-    When I run `rails generate hew:specs post`
+    When I run `rails generate hew post`
     Then the output should contain:
       """
             create  spec/features/user_views_posts_spec.rb
@@ -53,7 +53,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      Rspec.feature 'User updates a post' do
+      RSpec.feature 'User updates a post' do
         scenario 'post exists' do
           visit '/posts'
 
@@ -69,7 +69,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      Rspec.feature 'User deletes a post' do
+      RSpec.feature 'User deletes a post' do
         scenario 'post exists' do
           visit '/posts'
 

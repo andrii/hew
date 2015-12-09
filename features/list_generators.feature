@@ -6,5 +6,5 @@ Feature: List generators
     Then the output should contain:
       """
       Hew:
-        hew:specs
+        hew
       """
