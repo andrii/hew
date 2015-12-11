@@ -1,5 +1,7 @@
-@no-clobber
 Feature: Specs help
+
+  Background:
+    Given Hew is installed
 
   Scenario: View the hew generator description
     When I run `rails generate hew --help`

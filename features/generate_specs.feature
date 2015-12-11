@@ -1,5 +1,7 @@
-@no-clobber
 Feature: Generate specs
+
+  Background:
+    Given Hew is installed
 
   Scenario: Generate specs with no fields
     When I run `rails generate hew post`

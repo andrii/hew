@@ -1,5 +1,7 @@
-@no-clobber
 Feature: Delete specs
+
+  Background:
+    Given Hew is installed
 
   Scenario: Delete generated specs
     Given I run `rails generate hew purchase`
