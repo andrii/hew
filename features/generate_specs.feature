@@ -81,3 +81,20 @@ Feature: Generate specs
         end
       end
       """
+
+  Scenario: Generate specs with a string field
+    When I run `rails generate hew Post title`
+    Then a file named "spec/features/user_views_posts_spec.rb" should contain exactly:
+      """
+      require 'rails_helper'
+
+      RSpec.feature 'User views posts' do
+        scenario 'posts are present' do
+          post = posts(:post)
+
+          visit '/posts'
+
+          expect(page).to have_text(post.title)
+        end
+      end
+      """
