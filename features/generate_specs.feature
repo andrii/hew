@@ -19,7 +19,10 @@ Feature: Generate specs
 
       RSpec.feature 'User views posts' do
         scenario 'posts are present' do
+          post = posts(:post)
+
           visit '/posts'
+
         end
       end
       """
