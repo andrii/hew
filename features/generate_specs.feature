@@ -85,8 +85,8 @@ Feature: Generate specs
       end
       """
 
-  Scenario: Generate specs with a string field
-    When I run `rails generate hew Post title`
+  Scenario: Generate specs with string fields
+    When I run `rails generate hew Post title:string slug`
     Then a file named "spec/features/user_views_posts_spec.rb" should contain exactly:
       """
       require 'rails_helper'
@@ -98,6 +98,7 @@ Feature: Generate specs
           visit '/posts'
 
           expect(page).to have_text(post.title)
+          expect(page).to have_text(post.slug)
         end
       end
       """

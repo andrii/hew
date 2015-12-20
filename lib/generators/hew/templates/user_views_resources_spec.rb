@@ -6,8 +6,8 @@ RSpec.feature 'User views posts' do
 
     visit '/posts'
 
-    <%- unless attributes.blank? -%>
-    expect(page).to have_text(post.title)
+    <%- attributes.each do |attribute| -%>
+    expect(page).to have_text(post.<%= attribute.name %>)
     <%- end -%>
   end
 end
