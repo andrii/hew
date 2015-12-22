@@ -1,10 +1,9 @@
 Feature: Drive scaffolded CRUD
 
   Background:
-    Given Hew is installed
+    Given Hew, RSpec Rails and Capybara are installed
 
-  @wip
   Scenario: specs fail without a generated scaffold
     Given I run `rails generate hew User email`
-    When I run `bundle exec rspec`
+    When I run `rspec`
     Then the examples should all fail
