@@ -1,6 +1,6 @@
 Given(/^Hew is installed$/) do
   steps %Q{
-    Given I run `rails new . --skip-spring`
+    Given I run `rails new . --skip-spring --skip-sprockets`
     Given I append to "Gemfile" with "gem 'hew', path: '../..'"
     Given I run `bundle install`
   }
