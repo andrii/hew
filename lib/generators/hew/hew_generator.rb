@@ -4,6 +4,7 @@ class HewGenerator < Rails::Generators::NamedBase
   source_root File.expand_path("../templates", __FILE__)
 
   def create_specs
+    template 'fixture.yml', "spec/fixtures/#{plural_name}.yml"
     template 'user_views_resources_spec.rb', "spec/features/user_views_#{plural_name}_spec.rb"
     template 'user_creates_resource_spec.rb', "spec/features/user_creates_#{singular_name}_spec.rb"
     template 'user_views_resource_spec.rb', "spec/features/user_views_#{singular_name}_spec.rb"

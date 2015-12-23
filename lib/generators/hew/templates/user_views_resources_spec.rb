@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.feature 'User views posts' do
+  fixtures :posts
+
   scenario 'posts are present' do
     post = posts(:post)
 

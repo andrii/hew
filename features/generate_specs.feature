@@ -18,6 +18,8 @@ Feature: Generate specs
       require 'rails_helper'
 
       RSpec.feature 'User views posts' do
+        fixtures :posts
+
         scenario 'posts are present' do
           post = posts(:post)
 
@@ -47,7 +49,11 @@ Feature: Generate specs
       require 'rails_helper'
 
       RSpec.feature 'User views a post' do
+        fixtures :posts
+
         scenario 'post exists' do
+          posts(:post)
+
           visit '/posts'
 
           click_link 'Show'
@@ -59,7 +65,11 @@ Feature: Generate specs
       require 'rails_helper'
 
       RSpec.feature 'User updates a post' do
+        fixtures :posts
+
         scenario 'post exists' do
+          posts(:post)
+
           visit '/posts'
 
           click_link 'Edit'
@@ -75,7 +85,11 @@ Feature: Generate specs
       require 'rails_helper'
 
       RSpec.feature 'User deletes a post' do
+        fixtures :posts
+
         scenario 'post exists' do
+          posts(:post)
+
           visit '/posts'
 
           click_link 'Destroy'
@@ -92,6 +106,8 @@ Feature: Generate specs
       require 'rails_helper'
 
       RSpec.feature 'User views posts' do
+        fixtures :posts
+
         scenario 'posts are present' do
           post = posts(:post)
 

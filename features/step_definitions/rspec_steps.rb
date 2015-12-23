@@ -7,3 +7,9 @@ Then /^the example(?:s)? should(?: all)? fail$/ do
   example_count, failure_count = example_summary.captures
   expect(failure_count).to eq(example_count)
 end
+
+Then /^the example(?:s)? should(?: all)? pass$/ do
+  step %q{the output should contain "0 failures"}
+  step %q{the output should not contain "0 examples"}
+  step %q{the exit status should be 0}
+end
