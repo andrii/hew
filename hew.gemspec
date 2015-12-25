@@ -5,7 +5,4 @@ Gem::Specification.new do |s|
   s.author  = 'Andrii Ponomarov'
   s.add_runtime_dependency 'rails'
   s.add_development_dependency 'aruba'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'sqlite3'
 end
