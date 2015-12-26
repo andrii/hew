@@ -7,11 +7,17 @@ Feature: Generate specs
     When I run `rails generate hew post`
     Then the output should contain:
       """
+            create  spec/fixtures/posts.yml
             create  spec/features/user_views_posts_spec.rb
             create  spec/features/user_creates_post_spec.rb
             create  spec/features/user_views_post_spec.rb
             create  spec/features/user_updates_post_spec.rb
             create  spec/features/user_deletes_post_spec.rb
+      """
+    And a file named "spec/fixtures/posts.yml" should contain exactly:
+      """
+      post:
+        id: 1
       """
     And a file named "spec/features/user_views_posts_spec.rb" should contain exactly:
       """
