@@ -6,5 +6,5 @@ Before do
 end
 
 Aruba.configure do |config|
-  config.exit_timeout = 90
+  config.exit_timeout = 120
 end

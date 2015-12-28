@@ -1,23 +1,16 @@
-Feature: Generate specs
+Feature: Generate specs for a resource with string fields
 
   Background:
-    Given Hew is installed
+    Given Hew, RSpec Rails and Capybara are installed
 
-  Scenario: Generate specs with no fields
-    When I run `rails generate hew post`
-    Then the output should contain:
-      """
-            create  spec/fixtures/posts.yml
-            create  spec/features/user_views_posts_spec.rb
-            create  spec/features/user_creates_post_spec.rb
-            create  spec/features/user_views_post_spec.rb
-            create  spec/features/user_updates_post_spec.rb
-            create  spec/features/user_deletes_post_spec.rb
-      """
+  Scenario: Generate specs with string fields
+    Given I run `rails generate hew Post title:string slug`
     And a file named "spec/fixtures/posts.yml" should contain exactly:
       """
       post:
         id: 1
+        title: Title String
+        slug: Slug String
       """
     And a file named "spec/features/user_views_posts_spec.rb" should contain exactly:
       """
@@ -31,6 +24,8 @@ Feature: Generate specs
 
           visit '/posts'
 
+          expect(page).to have_text(post.title)
+          expect(page).to have_text(post.slug)
         end
       end
       """
@@ -44,6 +39,8 @@ Feature: Generate specs
 
           click_link 'New Post'
 
+          fill_in 'Title', with: 'Title String'
+          fill_in 'Slug', with: 'Slug String'
           click_button 'Create Post'
 
           expect(page).to have_text 'Post was successfully created.'
@@ -64,6 +61,8 @@ Feature: Generate specs
 
           click_link 'Show'
 
+          expect(page).to have_text(post.title)
+          expect(page).to have_text(post.slug)
         end
       end
       """
@@ -81,6 +80,8 @@ Feature: Generate specs
 
           click_link 'Edit'
 
+          fill_in 'Title', with: 'Updated Title String'
+          fill_in 'Slug', with: 'Updated Slug String'
           click_button 'Update Post'
 
           expect(page).to have_text 'Post was successfully updated.'
@@ -105,3 +106,7 @@ Feature: Generate specs
         end
       end
       """
+    And I run `rails generate scaffold Post title:string slug`
+    And I run `rake db:migrate RAILS_ENV=test`
+    When I run `bundle exec rspec`
+    Then the examples should all pass
