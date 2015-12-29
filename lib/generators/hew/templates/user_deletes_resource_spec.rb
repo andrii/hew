@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.feature 'User deletes a post' do
-  fixtures :posts
+RSpec.feature 'User deletes a <%= singular_name %>' do
+  fixtures :<%= plural_name %>
 
-  scenario 'post exists' do
-    posts(:post)
+  scenario '<%= singular_name %> exists' do
+    <%= plural_name %>(:<%= singular_name %>)
 
-    visit '/posts'
+    visit '/<%= plural_name %>'
 
     click_link 'Destroy'
 
-    expect(page).to have_text 'Post was successfully destroyed.'
+    expect(page).to have_text '<%= human_name %> was successfully destroyed.'
   end
 end

@@ -1,15 +1,15 @@
 require 'rails_helper'
 
-RSpec.feature 'User views posts' do
-  fixtures :posts
+RSpec.feature 'User views <%= plural_name %>' do
+  fixtures :<%= plural_name %>
 
-  scenario 'posts are present' do
-    post = posts(:post)
+  scenario '<%= plural_name %> are present' do
+    <%= singular_name %> = <%= plural_name %>(:<%= singular_name %>)
 
-    visit '/posts'
+    visit '/<%= plural_name %>'
 
     <%- attributes.each do |attribute| -%>
-    expect(page).to have_text(post.<%= attribute.name %>)
+    expect(page).to have_text(<%= singular_name %>.<%= attribute.name %>)
     <%- end -%>
   end
 end
