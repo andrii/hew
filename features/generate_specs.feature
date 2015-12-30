@@ -38,7 +38,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User creates post' do
+      RSpec.feature 'User creates a post' do
         scenario 'with valid parameters' do
           visit '/posts'
 
@@ -54,7 +54,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User views post' do
+      RSpec.feature 'User views a post' do
         fixtures :posts
 
         scenario 'post exists' do
@@ -71,7 +71,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User updates post' do
+      RSpec.feature 'User updates a post' do
         fixtures :posts
 
         scenario 'post exists' do
@@ -91,7 +91,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User deletes post' do
+      RSpec.feature 'User deletes a post' do
         fixtures :posts
 
         scenario 'post exists' do
@@ -138,7 +138,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User creates apartment' do
+      RSpec.feature 'User creates an apartment' do
         scenario 'with valid parameters' do
           visit '/apartments'
 
@@ -157,7 +157,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User views apartment' do
+      RSpec.feature 'User views an apartment' do
         fixtures :apartments
 
         scenario 'apartment exists' do
@@ -177,7 +177,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User updates apartment' do
+      RSpec.feature 'User updates an apartment' do
         fixtures :apartments
 
         scenario 'apartment exists' do
@@ -200,7 +200,7 @@ Feature: Generate specs
       """
       require 'rails_helper'
 
-      RSpec.feature 'User deletes apartment' do
+      RSpec.feature 'User deletes an apartment' do
         fixtures :apartments
 
         scenario 'apartment exists' do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User updates <%= singular_name %>' do
+RSpec.feature 'User updates <%= @indefinitized_name %>' do
   fixtures :<%= plural_name %>
 
   scenario '<%= singular_name %> exists' do

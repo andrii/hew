@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User deletes <%= singular_name %>' do
+RSpec.feature 'User deletes <%= @indefinitized_name %>' do
   fixtures :<%= plural_name %>
 
   scenario '<%= singular_name %> exists' do

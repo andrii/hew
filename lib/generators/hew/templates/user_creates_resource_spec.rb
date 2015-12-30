@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User creates <%= singular_name %>' do
+RSpec.feature 'User creates <%= @indefinitized_name %>' do
   scenario 'with valid parameters' do
     visit '/<%= plural_name %>'
 
