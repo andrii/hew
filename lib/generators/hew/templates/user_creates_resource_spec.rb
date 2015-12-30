@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.feature 'User creates a <%= singular_name %>' do
+RSpec.feature 'User creates <%= singular_name %>' do
   scenario 'with valid parameters' do
     visit '/<%= plural_name %>'
 
     click_link 'New <%= human_name %>'
 
     <%- attributes.each do |attribute| -%>
-    fill_in '<%= attribute.name.humanize %>', with: '<%= attribute.name.humanize %> <%= attribute.type.to_s.camelize %>'
+    fill_in '<%= attribute.name.humanize %>', with: '<%= attribute.default %>'
     <%- end -%>
     click_button 'Create <%= human_name %>'
 

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature 'User updates a <%= singular_name %>' do
+RSpec.feature 'User updates <%= singular_name %>' do
   fixtures :<%= plural_name %>
 
   scenario '<%= singular_name %> exists' do
@@ -11,7 +11,7 @@ RSpec.feature 'User updates a <%= singular_name %>' do
     click_link 'Edit'
 
     <%- attributes.each do |attribute| -%>
-    fill_in '<%= attribute.name.humanize %>', with: 'Updated <%= attribute.name.humanize %> <%= attribute.type.to_s.camelize %>'
+    <% if attribute.type == :integer %>fill_in '<%= attribute.name.humanize %>', with: '2'<% else %>fill_in '<%= attribute.name.humanize %>', with: 'Updated <%= attribute.default %>'<% end %>
     <%- end -%>
     click_button 'Update <%= human_name %>'
 
