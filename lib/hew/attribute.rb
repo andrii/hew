@@ -17,6 +17,8 @@ module Hew
         "Updated #{attribute.default}"
       elsif attribute.type == :integer
         2
+      elsif attribute.type == :float
+        2.5
       end
     end
   end
