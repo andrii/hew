@@ -10,8 +10,8 @@ RSpec.feature 'User updates <%= @indefinitized_name %>' do
 
     click_link 'Edit'
 
-    <%- attributes.each do |attribute| -%>
-    <% if attribute.type == :integer %>fill_in '<%= attribute.name.humanize %>', with: '2'<% else %>fill_in '<%= attribute.name.humanize %>', with: 'Updated <%= attribute.default %>'<% end %>
+    <%- @attributes.each do |attribute| -%>
+    fill_in '<%= attribute.name.humanize %>', with: '<%= attribute.updated_value %>'
     <%- end -%>
     click_button 'Update <%= human_name %>'
 

@@ -1,3 +1,5 @@
+require 'hew/attribute'
+
 class HewGenerator < Rails::Generators::NamedBase
   argument :attributes, type: :array, default: [], banner: "field[:type] field[:type]"
 
@@ -5,6 +7,7 @@ class HewGenerator < Rails::Generators::NamedBase
 
   def create_specs
     @indefinitized_name = indefinitize(singular_name)
+    @attributes = hew_attributes
 
     template 'fixture.yml', "spec/fixtures/#{plural_name}.yml"
     template 'user_views_resources_spec.rb', "spec/features/user_views_#{plural_name}_spec.rb"
@@ -19,5 +22,9 @@ class HewGenerator < Rails::Generators::NamedBase
   def indefinitize(word)
     article = word =~ /^[aeiou]/i ? 'an' : 'a'
     "#{article} #{word}"
+  end
+
+  def hew_attributes
+    attributes.map { |attr| Hew::Attribute.new(attr) }
   end
 end
