@@ -107,7 +107,7 @@ Feature: Generate specs
       """
 
   Scenario: Generate specs with fields
-    Given I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float`
+    Given I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal`
     And a file named "spec/fixtures/apartments.yml" should contain exactly:
       """
       apartment:
@@ -117,6 +117,7 @@ Feature: Generate specs
         bedrooms: 1
         latitude: 1.5
         longitude: 1.5
+        price: 9.99
       """
     And a file named "spec/features/user_views_apartments_spec.rb" should contain exactly:
       """
@@ -135,6 +136,7 @@ Feature: Generate specs
           expect(page).to have_text(apartment.bedrooms)
           expect(page).to have_text(apartment.latitude)
           expect(page).to have_text(apartment.longitude)
+          expect(page).to have_text(apartment.price)
         end
       end
       """
@@ -153,6 +155,7 @@ Feature: Generate specs
           fill_in 'Bedrooms', with: '1'
           fill_in 'Latitude', with: '1.5'
           fill_in 'Longitude', with: '1.5'
+          fill_in 'Price', with: '9.99'
           click_button 'Create Apartment'
 
           expect(page).to have_text 'Apartment was successfully created.'
@@ -178,6 +181,7 @@ Feature: Generate specs
           expect(page).to have_text(apartment.bedrooms)
           expect(page).to have_text(apartment.latitude)
           expect(page).to have_text(apartment.longitude)
+          expect(page).to have_text(apartment.price)
         end
       end
       """
@@ -200,6 +204,7 @@ Feature: Generate specs
           fill_in 'Bedrooms', with: '2'
           fill_in 'Latitude', with: '2.5'
           fill_in 'Longitude', with: '2.5'
+          fill_in 'Price', with: '10.99'
           click_button 'Update Apartment'
 
           expect(page).to have_text 'Apartment was successfully updated.'
@@ -224,7 +229,7 @@ Feature: Generate specs
         end
       end
       """
-    And I run `rails generate scaffold Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float`
+    And I run `rails generate scaffold Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal`
     And I run `rake db:migrate RAILS_ENV=test`
-    When I run `bundle exec rspec`
+    When I run `bundle exec rspec spec/features`
     Then the examples should all pass

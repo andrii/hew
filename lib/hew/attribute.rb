@@ -19,6 +19,8 @@ module Hew
         2
       elsif attribute.type == :float
         2.5
+      elsif attribute.type == :decimal
+        10.99
       end
     end
   end

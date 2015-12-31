@@ -37,4 +37,10 @@ describe Hew::Attribute do
     hew_attribute = Hew::Attribute.new(attribute)
     _(hew_attribute.updated_value).must_equal 2.5
   end
+
+  it 'returns an updated value for decimal attribute' do
+    attribute = OpenStruct.new(type: :decimal)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.updated_value).must_equal 10.99
+  end
 end

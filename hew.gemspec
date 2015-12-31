@@ -4,5 +4,4 @@ Gem::Specification.new do |s|
   s.summary = 'Acceptance test scaffolding for Rails'
   s.author  = 'Andrii Ponomarov'
   s.add_development_dependency 'aruba'
-  s.add_development_dependency 'rake'
 end
