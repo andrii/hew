@@ -5,4 +5,5 @@ Gem::Specification.new do |s|
   s.author  = 'Andrii Ponomarov'
   s.add_development_dependency 'aruba'
   s.add_development_dependency 'rake'
+  s.add_development_dependency 'minitest'
 end
