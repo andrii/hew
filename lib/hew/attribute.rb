@@ -20,6 +20,9 @@ module Hew
       when :float then 1.5
       when :decimal then 9.99
       when :datetime, :time then Time.new(2016, 1, 1, 15, 0, 0, 0)
+      when :date then Date.new(2016, 1, 1)
+      when :boolean then true
+      else 'MyString'
       end
     end
 
@@ -30,6 +33,9 @@ module Hew
       when :float then 2.5
       when :decimal then 10.99
       when :datetime, :time then Time.new(2016, 12, 16, 20, 0, 0, 0)
+      when :date then Date.new(2016, 12, 16)
+      when :boolean then false
+      else "Updated #{default}"
       end
     end
 
@@ -45,7 +51,7 @@ module Hew
 
     def actions(value)
       if [:string, :text, :integer, :float, :decimal].include?(attribute.type)
-        "    fill_in '#{attribute.name.humanize}', with: '#{value}'"
+        "    fill_in '#{name.humanize}', with: '#{value}'"
       elsif attribute.type == :datetime
         <<-RUBY
 
@@ -60,6 +66,17 @@ module Hew
     select '#{value.strftime('%H')}', from: 'apartment_#{name}_4i'
     select '#{value.strftime('%M')}', from: 'apartment_#{name}_5i'
         RUBY
+      elsif attribute.type == :date
+        <<-RUBY
+    select '#{value.strftime('%Y')}', from: 'apartment_#{name}_1i'
+    select '#{value.strftime('%B')}', from: 'apartment_#{name}_2i'
+    select '#{value.strftime('%-d')}', from: 'apartment_#{name}_3i'
+        RUBY
+      elsif attribute.type == :boolean
+        action = value ? 'check' : 'uncheck'
+        "    #{action} '#{name.humanize}'"
+      else
+        "    fill_in '#{name.humanize}', with: '#{value}'"
       end
     end
   end

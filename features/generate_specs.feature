@@ -107,8 +107,8 @@ Feature: Generate specs
       """
 
   Scenario: Generate specs with fields
-    Given I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime check_in_at:time`
-    And a file named "spec/fixtures/apartments.yml" should contain exactly:
+    When I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime check_in_at:time available_from:date fireplace:boolean`
+    Then a file named "spec/fixtures/apartments.yml" should contain exactly:
       """
       apartment:
         id: 1
@@ -120,6 +120,8 @@ Feature: Generate specs
         price: 9.99
         sprinkler_check_at: 2016-01-01 15:00:00 +0000
         check_in_at: 2016-01-01 15:00:00 +0000
+        available_from: 2016-01-01
+        fireplace: true
       """
     And a file named "spec/features/user_views_apartments_spec.rb" should contain exactly:
       """
@@ -141,6 +143,8 @@ Feature: Generate specs
           expect(page).to have_text(apartment.price)
           expect(page).to have_text(apartment.sprinkler_check_at)
           expect(page).to have_text(apartment.check_in_at)
+          expect(page).to have_text(apartment.available_from)
+          expect(page).to have_text(apartment.fireplace)
         end
       end
       """
@@ -170,6 +174,11 @@ Feature: Generate specs
           select '15', from: 'apartment_check_in_at_4i'
           select '00', from: 'apartment_check_in_at_5i'
 
+          select '2016', from: 'apartment_available_from_1i'
+          select 'January', from: 'apartment_available_from_2i'
+          select '1', from: 'apartment_available_from_3i'
+
+          check 'Fireplace'
           click_button 'Create Apartment'
 
           expect(page).to have_text 'Apartment was successfully created.'
@@ -198,6 +207,8 @@ Feature: Generate specs
           expect(page).to have_text(apartment.price)
           expect(page).to have_text(apartment.sprinkler_check_at)
           expect(page).to have_text(apartment.check_in_at)
+          expect(page).to have_text(apartment.available_from)
+          expect(page).to have_text(apartment.fireplace)
         end
       end
       """
@@ -231,6 +242,11 @@ Feature: Generate specs
           select '20', from: 'apartment_check_in_at_4i'
           select '00', from: 'apartment_check_in_at_5i'
 
+          select '2016', from: 'apartment_available_from_1i'
+          select 'December', from: 'apartment_available_from_2i'
+          select '16', from: 'apartment_available_from_3i'
+
+          uncheck 'Fireplace'
           click_button 'Update Apartment'
 
           expect(page).to have_text 'Apartment was successfully updated.'
@@ -255,7 +271,110 @@ Feature: Generate specs
         end
       end
       """
-    And I run `rails generate scaffold Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime check_in_at:time`
+    And I run `rails generate scaffold Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime check_in_at:time available_from:date fireplace:boolean`
+    And I run `rake db:migrate RAILS_ENV=test`
+    When I run `bundle exec rspec spec/features`
+    Then the examples should all pass
+
+  Scenario: Generate specs with unsupported fields
+    When I run `rails generate hew Book pdf:binary`
+    Then a file named "spec/fixtures/books.yml" should contain exactly:
+      """
+      book:
+        id: 1
+        pdf: MyString
+      """
+    And a file named "spec/features/user_views_books_spec.rb" should contain exactly:
+      """
+      require 'rails_helper'
+
+      RSpec.feature 'User views books' do
+        fixtures :books
+
+        scenario 'books are present' do
+          book = books(:book)
+
+          visit '/books'
+
+          expect(page).to have_text(book.pdf)
+        end
+      end
+      """
+    And a file named "spec/features/user_creates_book_spec.rb" should contain exactly:
+      """
+      require 'rails_helper'
+
+      RSpec.feature 'User creates a book' do
+        scenario 'with valid parameters' do
+          visit '/books'
+
+          click_link 'New Book'
+
+          fill_in 'Pdf', with: 'MyString'
+          click_button 'Create Book'
+
+          expect(page).to have_text 'Book was successfully created.'
+        end
+      end
+      """
+    And a file named "spec/features/user_views_book_spec.rb" should contain exactly:
+      """
+      require 'rails_helper'
+
+      RSpec.feature 'User views a book' do
+        fixtures :books
+
+        scenario 'book exists' do
+          book = books(:book)
+
+          visit '/books'
+
+          click_link 'Show'
+
+          expect(page).to have_text(book.pdf)
+        end
+      end
+      """
+    And a file named "spec/features/user_updates_book_spec.rb" should contain exactly:
+      """
+      require 'rails_helper'
+
+      RSpec.feature 'User updates a book' do
+        fixtures :books
+
+        scenario 'book exists' do
+          books(:book)
+
+          visit '/books'
+
+          click_link 'Edit'
+
+          fill_in 'Pdf', with: 'Updated MyString'
+          click_button 'Update Book'
+
+          expect(page).to have_text 'Book was successfully updated.'
+        end
+      end
+      """
+    And a file named "spec/features/user_deletes_book_spec.rb" should contain exactly:
+      """
+      require 'rails_helper'
+
+      RSpec.feature 'User deletes a book' do
+        fixtures :books
+
+        scenario 'book exists' do
+          books(:book)
+
+          visit '/books'
+
+          click_link 'Destroy'
+
+          expect(page).to have_text 'Book was successfully destroyed.'
+        end
+      end
+      """
+    And I run `rails generate scaffold Book pdf:binary`
     And I run `rake db:migrate RAILS_ENV=test`
     When I run `bundle exec rspec spec/features`
     Then the examples should all pass

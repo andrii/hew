@@ -52,6 +52,24 @@ describe Hew::Attribute do
     _(hew_attribute.default.to_s).must_equal '2016-01-01 15:00:00 +0000'
   end
 
+  it 'returns a default value for date attribute' do
+    attribute = OpenStruct.new(type: :date)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.default.to_s).must_equal '2016-01-01'
+  end
+
+  it 'returns a default value for boolean attribute' do
+    attribute = OpenStruct.new(type: :boolean)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.default).must_equal true
+  end
+
+  it 'returns a default value for unsupported attribute' do
+    attribute = OpenStruct.new(type: :binary)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.default).must_equal 'MyString'
+  end
+
   it 'returns a new value for string attribute' do
     attribute = OpenStruct.new(type: :string)
     hew_attribute = Hew::Attribute.new(attribute)
@@ -92,6 +110,24 @@ describe Hew::Attribute do
     attribute = OpenStruct.new(type: :time)
     hew_attribute = Hew::Attribute.new(attribute)
     _(hew_attribute.update_value.to_s).must_equal '2016-12-16 20:00:00 +0000'
+  end
+
+  it 'returns a new value for date attribute' do
+    attribute = OpenStruct.new(type: :date)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.update_value.to_s).must_equal '2016-12-16'
+  end
+
+  it 'returns a new value for boolean attribute' do
+    attribute = OpenStruct.new(type: :boolean)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.update_value).must_equal false
+  end
+
+  it 'returns a new value for unsupported attribute' do
+    attribute = OpenStruct.new(type: :binary)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.update_value).must_equal 'Updated MyString'
   end
 
   it 'returns capybara actions for entering a new string attribute' do
@@ -146,6 +182,28 @@ describe Hew::Attribute do
     RUBY
   end
 
+  it 'returns capybara actions for entering a new date attribute' do
+    attribute = OpenStruct.new(name: 'available_from', type: :date)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.create_actions).must_equal <<-RUBY
+    select '2016', from: 'apartment_available_from_1i'
+    select 'January', from: 'apartment_available_from_2i'
+    select '1', from: 'apartment_available_from_3i'
+    RUBY
+  end
+
+  it 'returns capybara actions for entering a new boolean attribute' do
+    attribute = OpenStruct.new(name: 'fireplace', type: :boolean)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.create_actions).must_equal "    check 'Fireplace'"
+  end
+
+  it 'returns capybara actions for entering a new unsupported attribute' do
+    attribute = OpenStruct.new(name: 'pdf', type: :binary)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.create_actions).must_equal "    fill_in 'Pdf', with: 'MyString'"
+  end
+
   it 'returns capybara actions for updating an existing string attribute' do
     attribute = OpenStruct.new(name: 'full_address', type: :string)
     hew_attribute = Hew::Attribute.new(attribute)
@@ -196,5 +254,27 @@ describe Hew::Attribute do
     select '20', from: 'apartment_check_in_at_4i'
     select '00', from: 'apartment_check_in_at_5i'
     RUBY
+  end
+
+  it 'returns capybara actions for updating an existing date attribute' do
+    attribute = OpenStruct.new(name: 'available_from', type: :date)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.update_actions).must_equal <<-RUBY
+    select '2016', from: 'apartment_available_from_1i'
+    select 'December', from: 'apartment_available_from_2i'
+    select '16', from: 'apartment_available_from_3i'
+    RUBY
+  end
+
+  it 'returns capybara actions for updating an existing boolean attribute' do
+    attribute = OpenStruct.new(name: 'fireplace', type: :boolean)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.update_actions).must_equal "    uncheck 'Fireplace'"
+  end
+
+  it 'returns capybara actions for updating an existing unsupported attribute' do
+    attribute = OpenStruct.new(name: 'pdf', type: :binary)
+    hew_attribute = Hew::Attribute.new(attribute)
+    _(hew_attribute.update_actions).must_equal "    fill_in 'Pdf', with: 'Updated MyString'"
   end
 end
