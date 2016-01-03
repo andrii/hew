@@ -107,7 +107,7 @@ Feature: Generate specs
       """
 
   Scenario: Generate specs with fields
-    Given I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal`
+    Given I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime`
     And a file named "spec/fixtures/apartments.yml" should contain exactly:
       """
       apartment:
@@ -118,6 +118,7 @@ Feature: Generate specs
         latitude: 1.5
         longitude: 1.5
         price: 9.99
+        sprinkler_check_at: 2016-01-01 00:00:00 +0000
       """
     And a file named "spec/features/user_views_apartments_spec.rb" should contain exactly:
       """
@@ -137,6 +138,7 @@ Feature: Generate specs
           expect(page).to have_text(apartment.latitude)
           expect(page).to have_text(apartment.longitude)
           expect(page).to have_text(apartment.price)
+          expect(page).to have_text(apartment.sprinkler_check_at)
         end
       end
       """
@@ -156,6 +158,13 @@ Feature: Generate specs
           fill_in 'Latitude', with: '1.5'
           fill_in 'Longitude', with: '1.5'
           fill_in 'Price', with: '9.99'
+
+          select '2016', from: 'apartment_sprinkler_check_at_1i'
+          select 'January', from: 'apartment_sprinkler_check_at_2i'
+          select '1', from: 'apartment_sprinkler_check_at_3i'
+          select '00', from: 'apartment_sprinkler_check_at_4i'
+          select '00', from: 'apartment_sprinkler_check_at_5i'
+
           click_button 'Create Apartment'
 
           expect(page).to have_text 'Apartment was successfully created.'
@@ -182,6 +191,7 @@ Feature: Generate specs
           expect(page).to have_text(apartment.latitude)
           expect(page).to have_text(apartment.longitude)
           expect(page).to have_text(apartment.price)
+          expect(page).to have_text(apartment.sprinkler_check_at)
         end
       end
       """
@@ -205,6 +215,13 @@ Feature: Generate specs
           fill_in 'Latitude', with: '2.5'
           fill_in 'Longitude', with: '2.5'
           fill_in 'Price', with: '10.99'
+
+          select '2016', from: 'apartment_sprinkler_check_at_1i'
+          select 'December', from: 'apartment_sprinkler_check_at_2i'
+          select '16', from: 'apartment_sprinkler_check_at_3i'
+          select '20', from: 'apartment_sprinkler_check_at_4i'
+          select '00', from: 'apartment_sprinkler_check_at_5i'
+
           click_button 'Update Apartment'
 
           expect(page).to have_text 'Apartment was successfully updated.'
@@ -229,7 +246,7 @@ Feature: Generate specs
         end
       end
       """
-    And I run `rails generate scaffold Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal`
+    And I run `rails generate scaffold Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime`
     And I run `rake db:migrate RAILS_ENV=test`
     When I run `bundle exec rspec spec/features`
     Then the examples should all pass

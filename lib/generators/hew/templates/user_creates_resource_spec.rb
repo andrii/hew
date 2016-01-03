@@ -6,9 +6,9 @@ RSpec.feature 'User creates <%= @indefinitized_name %>' do
 
     click_link 'New <%= human_name %>'
 
-    <%- attributes.each do |attribute| -%>
-    fill_in '<%= attribute.name.humanize %>', with: '<%= attribute.default %>'
-    <%- end -%>
+<%- attributes.each do |attribute| -%>
+<%= attribute.create_actions %>
+<%- end -%>
     click_button 'Create <%= human_name %>'
 
     expect(page).to have_text '<%= human_name %> was successfully created.'
