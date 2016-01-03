@@ -19,7 +19,7 @@ module Hew
       when :integer then 1
       when :float then 1.5
       when :decimal then 9.99
-      when :datetime then Time.new(2016, 1, 1, 0, 0, 0, 0)
+      when :datetime, :time then Time.new(2016, 1, 1, 15, 0, 0, 0)
       end
     end
 
@@ -29,7 +29,7 @@ module Hew
       when :integer then 2
       when :float then 2.5
       when :decimal then 10.99
-      when :datetime then Time.new(2016, 12, 16, 20, 0, 0, 0)
+      when :datetime, :time then Time.new(2016, 12, 16, 20, 0, 0, 0)
       end
     end
 
@@ -49,11 +49,16 @@ module Hew
       elsif attribute.type == :datetime
         <<-RUBY
 
-    select '#{value.strftime('%Y')}', from: 'apartment_sprinkler_check_at_1i'
-    select '#{value.strftime('%B')}', from: 'apartment_sprinkler_check_at_2i'
-    select '#{value.strftime('%-d')}', from: 'apartment_sprinkler_check_at_3i'
-    select '#{value.strftime('%H')}', from: 'apartment_sprinkler_check_at_4i'
-    select '#{value.strftime('%M')}', from: 'apartment_sprinkler_check_at_5i'
+    select '#{value.strftime('%Y')}', from: 'apartment_#{name}_1i'
+    select '#{value.strftime('%B')}', from: 'apartment_#{name}_2i'
+    select '#{value.strftime('%-d')}', from: 'apartment_#{name}_3i'
+    select '#{value.strftime('%H')}', from: 'apartment_#{name}_4i'
+    select '#{value.strftime('%M')}', from: 'apartment_#{name}_5i'
+        RUBY
+      elsif attribute.type == :time
+        <<-RUBY
+    select '#{value.strftime('%H')}', from: 'apartment_#{name}_4i'
+    select '#{value.strftime('%M')}', from: 'apartment_#{name}_5i'
         RUBY
       end
     end
