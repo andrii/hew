@@ -7,7 +7,7 @@ RSpec.feature 'User creates <%= @indefinitized_name %>' do
     click_link 'New <%= human_name %>'
 
 <%- attributes.each do |attribute| -%>
-<%= attribute.create_actions %>
+<%= attribute.create_action %>
 <%- end -%>
     click_button 'Create <%= human_name %>'
 

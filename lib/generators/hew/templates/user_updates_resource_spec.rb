@@ -11,7 +11,7 @@ RSpec.feature 'User updates <%= @indefinitized_name %>' do
     click_link 'Edit'
 
 <%- @attributes.each do |attribute| -%>
-<%= attribute.update_actions %>
+<%= attribute.update_action %>
 <%- end -%>
     click_button 'Update <%= human_name %>'
 
