@@ -6,7 +6,7 @@ module Hew
         hour   = value.strftime('%H')
         minute = value.strftime('%M')
 
-        <<-RUBY
+        <<-RUBY.sub(/^\s{4}/, '')
     select '#{hour}', from: 'apartment_#{name}_4i'
     select '#{minute}', from: 'apartment_#{name}_5i'
         RUBY

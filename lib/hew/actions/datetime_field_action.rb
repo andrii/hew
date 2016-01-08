@@ -5,7 +5,7 @@ module Hew
         date_action = Actions::DateFieldAction.render(attribute, value)
         time_action = Actions::TimeFieldAction.render(attribute, value)
 
-        "\n" + date_action + time_action
+        "\n    #{date_action}    #{time_action}"
       end
     end
   end

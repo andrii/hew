@@ -12,14 +12,14 @@ describe Hew::Attributes::TimeAttribute do
   end
 
   it 'returns the Capybara action for entering the attribute create value' do
-    _(attribute.create_action).must_equal <<-RUBY
+    _(attribute.create_action).must_equal <<-RUBY.sub(/^\s{4}/, '')
     select '15', from: 'apartment_check_in_at_4i'
     select '00', from: 'apartment_check_in_at_5i'
     RUBY
   end
 
   it 'returns the Capybara actions for entering the attribute update value' do
-    _(attribute.update_action).must_equal <<-RUBY
+    _(attribute.update_action).must_equal <<-RUBY.sub(/^\s{4}/, '')
     select '20', from: 'apartment_check_in_at_4i'
     select '00', from: 'apartment_check_in_at_5i'
     RUBY

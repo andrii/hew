@@ -12,10 +12,10 @@ describe Hew::Attributes::BooleanAttribute do
   end
 
   it 'returns the Capybara action for entering the attribute create value' do
-    _(attribute.create_action).must_equal "    check 'Fireplace'"
+    _(attribute.create_action).must_equal "check 'Fireplace'"
   end
 
   it 'returns the Capybara actions for entering the attribute update value' do
-    _(attribute.update_action).must_equal "    uncheck 'Fireplace'"
+    _(attribute.update_action).must_equal "uncheck 'Fireplace'"
   end
 end

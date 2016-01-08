@@ -5,7 +5,7 @@ module Hew
         name   = attribute.name.humanize
         action = value ? 'check' : 'uncheck'
 
-        "    #{action} '#{name}'"
+        "#{action} '#{name}'"
       end
     end
   end

@@ -13,10 +13,7 @@ module Hew
       private
 
       def action(value)
-        date_action = Actions::DateFieldAction.render(self, value)
-        time_action = Actions::TimeFieldAction.render(self, value)
-
-        "\n" + date_action + time_action
+        Actions::DatetimeFieldAction.render(self, value)
       end
     end
   end

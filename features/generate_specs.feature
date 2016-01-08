@@ -164,7 +164,7 @@ Feature: Generate specs
           fill_in 'Latitude', with: '1.5'
           fill_in 'Longitude', with: '1.5'
           fill_in 'Price', with: '9.99'
-
+          
           select '2016', from: 'apartment_sprinkler_check_at_1i'
           select 'January', from: 'apartment_sprinkler_check_at_2i'
           select '1', from: 'apartment_sprinkler_check_at_3i'
@@ -232,7 +232,7 @@ Feature: Generate specs
           fill_in 'Latitude', with: '2.5'
           fill_in 'Longitude', with: '2.5'
           fill_in 'Price', with: '10.99'
-
+          
           select '2016', from: 'apartment_sprinkler_check_at_1i'
           select 'December', from: 'apartment_sprinkler_check_at_2i'
           select '16', from: 'apartment_sprinkler_check_at_3i'

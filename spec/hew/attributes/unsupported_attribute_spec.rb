@@ -12,10 +12,10 @@ describe Hew::Attributes::UnsupportedAttribute do
   end
 
   it 'returns the Capybara action for entering the attribute create value' do
-    _(attribute.create_action).must_equal "    fill_in 'Pdf', with: 'MyString'"
+    _(attribute.create_action).must_equal "fill_in 'Pdf', with: 'MyString'"
   end
 
   it 'returns the Capybara actions for entering the attribute update value' do
-    _(attribute.update_action).must_equal "    fill_in 'Pdf', with: 'Updated MyString'"
+    _(attribute.update_action).must_equal "fill_in 'Pdf', with: 'Updated MyString'"
   end
 end

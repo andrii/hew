@@ -12,10 +12,10 @@ describe Hew::Attributes::DecimalAttribute do
   end
 
   it 'returns the Capybara action for entering the attribute create value' do
-    _(attribute.create_action).must_equal "    fill_in 'Price', with: '9.99'"
+    _(attribute.create_action).must_equal "fill_in 'Price', with: '9.99'"
   end
 
   it 'returns the Capybara actions for entering the attribute update value' do
-    _(attribute.update_action).must_equal "    fill_in 'Price', with: '10.99'"
+    _(attribute.update_action).must_equal "fill_in 'Price', with: '10.99'"
   end
 end

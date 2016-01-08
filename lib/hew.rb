@@ -1,3 +1,4 @@
+require 'ostruct'
 require 'active_support/core_ext/string'
 
 require 'hew/attributes/attribute'

@@ -10,9 +10,9 @@ RSpec.feature 'User updates <%= @indefinitized_name %>' do
 
     click_link 'Edit'
 
-<%- @attributes.each do |attribute| -%>
-<%= attribute.update_action %>
-<%- end -%>
+    <%- @attributes.each do |attribute| -%>
+    <%= attribute.update_action %>
+    <%- end -%>
     click_button 'Update <%= human_name %>'
 
     expect(page).to have_text '<%= human_name %> was successfully updated.'

@@ -12,10 +12,10 @@ describe Hew::Attributes::TextAttribute do
   end
 
   it 'returns the Capybara action for entering the attribute create value' do
-    _(attribute.create_action).must_equal "    fill_in 'Description', with: 'MyText'"
+    _(attribute.create_action).must_equal "fill_in 'Description', with: 'MyText'"
   end
 
   it 'returns the Capybara actions for entering the attribute update value' do
-    _(attribute.update_action).must_equal "    fill_in 'Description', with: 'Updated MyText'"
+    _(attribute.update_action).must_equal "fill_in 'Description', with: 'Updated MyText'"
   end
 end

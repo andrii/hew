@@ -6,7 +6,7 @@ describe Hew::Actions::TimeFieldAction do
     attribute = OpenStruct.new(name: 'check_in_at')
     template = Hew::Actions::TimeFieldAction.render(attribute, value)
 
-    _(template).must_equal <<-RUBY
+    _(template).must_equal <<-RUBY.sub(/^\s{4}/, '')
     select '15', from: 'apartment_check_in_at_4i'
     select '00', from: 'apartment_check_in_at_5i'
     RUBY

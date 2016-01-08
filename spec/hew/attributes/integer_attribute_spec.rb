@@ -12,10 +12,10 @@ describe Hew::Attributes::IntegerAttribute do
   end
 
   it 'returns the Capybara action for entering the attribute create value' do
-    _(attribute.create_action).must_equal "    fill_in 'Bedrooms', with: '1'"
+    _(attribute.create_action).must_equal "fill_in 'Bedrooms', with: '1'"
   end
 
   it 'returns the Capybara actions for entering the attribute update value' do
-    _(attribute.update_action).must_equal "    fill_in 'Bedrooms', with: '2'"
+    _(attribute.update_action).must_equal "fill_in 'Bedrooms', with: '2'"
   end
 end
