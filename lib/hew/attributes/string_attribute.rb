@@ -1,13 +1,10 @@
 module Hew
   module Attributes
     class StringAttribute < Attribute
-      attr_reader :table_name, :name, :create_value, :update_value
-
       def initialize(table_name, name)
-        @table_name   = table_name
-        @name         = name
         @create_value = 'MyString'
         @update_value = 'Updated MyString'
+        super
       end
 
       private
