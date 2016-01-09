@@ -18,3 +18,5 @@ require 'hew/actions/date_field_action'
 require 'hew/actions/time_field_action'
 require 'hew/actions/datetime_field_action'
 require 'hew/actions/check_box_action'
+
+require 'hew/test_data/fixture'

@@ -1,5 +1,0 @@
-<%= singular_name %>:
-  id: 1
-  <%- attributes.each do |attribute| -%>
-  <%= attribute.name %>: <%= attribute.create_value %>
-  <%- end -%>

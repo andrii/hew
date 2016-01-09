@@ -6,8 +6,9 @@ class HewGenerator < Rails::Generators::NamedBase
   def create_specs
     @indefinitized_name = indefinitize(singular_name)
     @attributes = hew_attributes
+    data_file = Hew::TestData::Fixture.new(singular_name, attributes)
 
-    template 'fixture.yml', "spec/fixtures/#{plural_name}.yml"
+    add_file data_file.name, data_file.content
     template 'user_views_resources_spec.rb', "spec/features/user_views_#{plural_name}_spec.rb"
     template 'user_creates_resource_spec.rb', "spec/features/user_creates_#{singular_name}_spec.rb"
     template 'user_views_resource_spec.rb', "spec/features/user_views_#{singular_name}_spec.rb"
