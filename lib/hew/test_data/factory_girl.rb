@@ -1,6 +1,6 @@
 module Hew
   module TestData
-    class FactoryGirl < DataFile
+    class FactoryGirl < Library
       def file_name
         "spec/factories/#{table_name.pluralize}.rb"
       end

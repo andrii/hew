@@ -1,6 +1,6 @@
 module Hew
   module TestData
-    class Fixtures < DataFile
+    class Fixtures < Library
       def file_name
         "spec/fixtures/#{table_name.pluralize}.yml"
       end

@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Hew::Actions::DatetimeFieldAction do
-  it 'renders the Capybara action for the given attribute/value' do
+  it 'returns the Capybara action for the given attribute/value' do
     attribute = OpenStruct.new(name: 'sprinkler_check_at')
-    template = Hew::Actions::DatetimeFieldAction.render(attribute, Time.new(2016, 1, 1, 15, 0, 0, 0))
+    template = Hew::Actions::DatetimeFieldAction.for(attribute, Time.new(2016, 1, 1, 15, 0, 0, 0))
 
     _(template).must_equal <<-RUBY
 

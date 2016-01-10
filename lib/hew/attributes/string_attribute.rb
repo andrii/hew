@@ -10,7 +10,7 @@ module Hew
       private
 
       def action(value)
-        Actions::TextFieldAction.render(self, value)
+        Actions::TextFieldAction.for(self, value)
       end
     end
   end

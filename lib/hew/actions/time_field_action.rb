@@ -1,7 +1,7 @@
 module Hew
   module Actions
     class TimeFieldAction
-      def self.render(attribute, value)
+      def self.for(attribute, value)
         name   = attribute.name
         hour   = value.strftime('%H')
         minute = value.strftime('%M')

@@ -10,7 +10,7 @@ module Hew
       private
 
       def action(value)
-        Actions::CheckBoxAction.render(self, value)
+        Actions::CheckBoxAction.for(self, value)
       end
     end
   end

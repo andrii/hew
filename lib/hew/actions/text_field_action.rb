@@ -1,7 +1,7 @@
 module Hew
   module Actions
     class TextFieldAction
-      def self.render(attribute, value)
+      def self.for(attribute, value)
         name = attribute.name.humanize
 
         "fill_in '#{name}', with: '#{value}'"

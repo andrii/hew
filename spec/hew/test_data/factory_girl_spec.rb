@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Hew::TestData::FactoryGirl do
   it 'returns the filename' do
-    file = Hew::TestData::FactoryGirl.new('user', [])
-    _(file.file_name).must_equal 'spec/factories/users.rb'
+    test_data = Hew::TestData::FactoryGirl.new('user', [])
+    _(test_data.file_name).must_equal 'spec/factories/users.rb'
   end
 
   it 'returns the factory file content' do
@@ -21,9 +21,9 @@ describe Hew::TestData::FactoryGirl do
     }
 
     attributes = attrs.each.map { |name, value| OpenStruct.new(name: name, create_value: value) }
-    file = Hew::TestData::FactoryGirl.new('apartment', attributes)
+    test_data = Hew::TestData::FactoryGirl.new('apartment', attributes)
 
-    _(file.file_content).must_equal <<-YAML
+    _(test_data.file_content).must_equal <<-YAML
 FactoryGirl.define do
   factory :apartment do
     full_address 'MyString'

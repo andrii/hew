@@ -1,7 +1,7 @@
 module Hew
   module Actions
     class DateFieldAction
-      def self.render(attribute, value)
+      def self.for(attribute, value)
         name  = attribute.name
         year  = value.strftime('%Y')
         month = value.strftime('%B')

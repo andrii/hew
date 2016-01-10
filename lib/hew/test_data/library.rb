@@ -1,6 +1,6 @@
 module Hew
   module TestData
-    class DataFile
+    class Library
       attr_reader :table_name, :attributes
 
       def initialize(table_name, attributes)

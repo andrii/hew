@@ -10,7 +10,7 @@ module Hew
       private
 
       def action(value)
-        Actions::DatetimeFieldAction.render(self, value)
+        Actions::DatetimeFieldAction.for(self, value)
       end
     end
   end
