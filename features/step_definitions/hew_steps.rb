@@ -42,3 +42,15 @@ Given(/^Hew, RSpec Rails, Capybara and Factory Girl are installed$/) do
       """
   }
 end
+
+Given(/^Hew, RSpec Rails, Capybara and Fabrication are installed$/) do
+  steps %Q{
+    Given Hew, RSpec Rails and Capybara are installed
+    Given I append to "Gemfile" with:
+      """
+
+      gem 'fabrication'
+      """
+    Given I run `bundle install`
+  }
+end

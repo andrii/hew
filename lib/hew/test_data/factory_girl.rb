@@ -21,13 +21,6 @@ module Hew
       def create
         "create(:#{table_name})"
       end
-
-      private
-
-      def format_value(value)
-        quote = %w(String Date Time).include?(value.class.to_s)
-        quote ? "'#{value}'" : value
-      end
     end
   end
 end
