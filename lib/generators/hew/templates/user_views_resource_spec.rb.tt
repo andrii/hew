@@ -1,10 +1,12 @@
 require 'rails_helper'
 
 RSpec.feature 'User views <%= @indefinitized_name %>' do
+<% if options['test_data'] == 'fixtures' -%>
   fixtures :<%= plural_name %>
 
+<% end -%>
   scenario '<%= singular_name %> exists' do
-    <%= singular_name %> = <%= plural_name %>(:<%= singular_name %>)
+    <%= singular_name %> = <%= @test_data.create %>
 
     visit '/<%= plural_name %>'
 

@@ -1,18 +1,11 @@
 module Hew
   module TestData
-    class Fixture
-      attr_reader :table_name, :attributes
-
-      def initialize(table_name, attributes)
-        @table_name = table_name
-        @attributes = attributes
-      end
-
-      def name
+    class Fixtures < DataFile
+      def file_name
         "spec/fixtures/#{table_name.pluralize}.yml"
       end
 
-      def content
+      def file_content
         yaml = ''
         yaml << "#{table_name}:\n"
         yaml << "  id: 1\n"
@@ -22,6 +15,10 @@ module Hew
         end
 
         yaml
+      end
+
+      def create
+        "#{table_name.pluralize}(:#{table_name})"
       end
     end
   end

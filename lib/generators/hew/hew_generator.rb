@@ -3,12 +3,14 @@ class HewGenerator < Rails::Generators::NamedBase
 
   source_root File.expand_path("../templates", __FILE__)
 
+  class_option :test_data, default: 'fixtures'
+
   def create_specs
     @indefinitized_name = indefinitize(singular_name)
-    @attributes = hew_attributes
-    data_file = Hew::TestData::Fixture.new(singular_name, attributes)
+    @attributes = attributes.map { |attr| hew_attribute(attr) }
+    @test_data = test_data_class.new(singular_name, attributes)
 
-    add_file data_file.name, data_file.content
+    add_file @test_data.file_name, @test_data.file_content
     template 'user_views_resources_spec.rb', "spec/features/user_views_#{plural_name}_spec.rb"
     template 'user_creates_resource_spec.rb', "spec/features/user_creates_#{singular_name}_spec.rb"
     template 'user_views_resource_spec.rb', "spec/features/user_views_#{singular_name}_spec.rb"
@@ -23,16 +25,18 @@ class HewGenerator < Rails::Generators::NamedBase
     "#{article} #{word}"
   end
 
-  def hew_attributes
-    attributes.map do |attr|
-      klass =
-        begin
-          "Hew::Attributes::#{attr.type.to_s.camelize}Attribute".constantize
-        rescue NameError
-          Hew::Attributes::UnsupportedAttribute
-        end
+  def hew_attribute(attribute)
+    klass = hew_attribute_class(attribute)
+    klass.new(singular_name, attribute.name)
+  end
 
-      klass.new(singular_name, attr.name)
-    end
+  def hew_attribute_class(attribute)
+    "Hew::Attributes::#{attribute.type.to_s.camelize}Attribute".constantize
+  rescue NameError
+    Hew::Attributes::UnsupportedAttribute
+  end
+
+  def test_data_class
+    "Hew::TestData::#{options['test_data'].camelize}".constantize
   end
 end

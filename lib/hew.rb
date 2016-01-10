@@ -19,4 +19,6 @@ require 'hew/actions/time_field_action'
 require 'hew/actions/datetime_field_action'
 require 'hew/actions/check_box_action'
 
-require 'hew/test_data/fixture'
+require 'hew/test_data/data_file'
+require 'hew/test_data/fixtures'
+require 'hew/test_data/factory_girl'
