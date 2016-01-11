@@ -1,4 +1,8 @@
+require 'hew'
+
 class HewGenerator < Rails::Generators::NamedBase
+  LIBRARIES = %w(fixtures factory_girl fabrication)
+
   argument :attributes, type: :array, default: [], banner: "field[:type] field[:type]"
 
   source_root File.expand_path("../templates", __FILE__)
@@ -37,6 +41,10 @@ class HewGenerator < Rails::Generators::NamedBase
   end
 
   def test_data_class
-    "Hew::TestData::#{options['test_data'].camelize}".constantize
+    library = options['test_data']
+
+    "Hew::TestData::#{library.camelize}".constantize
+  rescue NameError
+    raise Thor::Error, "#{library} library is not supported. Supported options are: #{LIBRARIES.join('/')}."
   end
 end
