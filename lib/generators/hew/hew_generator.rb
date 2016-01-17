@@ -7,7 +7,7 @@ class HewGenerator < Rails::Generators::NamedBase
 
   source_root File.expand_path("../templates", __FILE__)
 
-  class_option :test_data, aliases: '-f', default: 'fixtures'
+  class_option :test_data, aliases: '-F', default: 'fixtures'
 
   def create_specs
     @indefinitized_name = indefinitize(singular_name)
