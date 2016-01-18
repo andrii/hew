@@ -10,7 +10,7 @@ Feature: Drive scaffolded CRUD
 
   Scenario: specs pass with a generated scaffold
     Given I run `rails generate hew Post title`
-    And I run `rails generate scaffold Post title`
-    And I run `rake db:migrate RAILS_ENV=test`
+      And I run `rails generate scaffold Post title`
+      And I run `rake db:migrate RAILS_ENV=test`
     When I run `bundle exec rspec`
     Then the examples should all pass

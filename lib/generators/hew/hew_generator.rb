@@ -3,11 +3,13 @@ require 'hew'
 class HewGenerator < Rails::Generators::NamedBase
   LIBRARIES = %w(fixtures factory_girl fabrication)
 
-  argument :attributes, type: :array, default: [], banner: "field[:type] field[:type]"
+  argument     :attributes, type: :array, default: [],
+                            banner: 'field[:type] field[:type]'
 
-  source_root File.expand_path("../templates", __FILE__)
+  class_option :test_data,  type: :string, aliases: '-F', default: 'fixtures',
+                            desc: "Indicates the test data library (options: #{LIBRARIES.join('/')})"
 
-  class_option :test_data, aliases: '-F', default: 'fixtures'
+  source_root File.expand_path('../templates', __FILE__)
 
   def create_specs
     @indefinitized_name = indefinitize(singular_name)

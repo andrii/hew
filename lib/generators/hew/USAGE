@@ -1,0 +1,22 @@
+Description:
+    Generates the CRUD acceptance tests using RSpec and Capybara for the given
+    resource.
+
+    Pass the name of the model (in a singular form), either CamelCased or
+    under_scored, as the first argument, and an optional list of attribute
+    pairs. The same attribute types as Rails scaffold generator's are supported.
+    Generating a scaffold with the same parameters makes the tests pass.
+
+    The test data file can be configured by passing the "--test-data" argument
+    or its alias '-F' with one of the supported libraries ('fixtures',
+    'factory_girl' and 'fabrication'). Rails fixtures is the default option.
+
+    If you want to remove all the generated files, run
+    'rails destroy hew ModelName'.
+
+Examples:
+    `rails generate hew account`
+    `rails generate hew project name:string`
+    `rails generate hew card activated_at:datetime expires_at:date -F factory_girl`
+    `rails generate hew purchase amount:decimal tracking_id:integer -F fabrication`
+    `rails generate hew post title body:text published:boolean --test-data=fabrication`
