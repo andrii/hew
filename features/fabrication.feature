@@ -1,12 +1,14 @@
-Feature: Generate specs with Fabrication
+Feature: Fabrication
+
+  Pass the `--test-data` (or `-F`) option with `fabrication` to generate the specs with fabricators.
 
   Background:
-    Given Hew, RSpec Rails, Capybara and Fabrication are installed
+    Given hew, rspec-rails, capybara and fabrication are installed
 
-  Scenario: Generate specs with Factory Girl
+  Scenario: Generate specs with fabricators
     When I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime check_in_at:time available_from:date fireplace:boolean --test-data=fabrication`
     Then a file named "spec/fabricators/apartment_fabricator.rb" should contain exactly:
-      """
+      """ruby
       Fabricator(:apartment) do
         full_address 'MyString'
         description 'MyText'
@@ -21,7 +23,7 @@ Feature: Generate specs with Fabrication
       end
       """
     And a file named "spec/features/user_views_apartments_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User views apartments' do
@@ -44,7 +46,7 @@ Feature: Generate specs with Fabrication
       end
       """
     And a file named "spec/features/user_creates_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User creates an apartment' do
@@ -81,7 +83,7 @@ Feature: Generate specs with Fabrication
       end
       """
     And a file named "spec/features/user_views_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User views an apartment' do
@@ -106,7 +108,7 @@ Feature: Generate specs with Fabrication
       end
       """
     And a file named "spec/features/user_updates_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User updates an apartment' do
@@ -145,7 +147,7 @@ Feature: Generate specs with Fabrication
       end
       """
     And a file named "spec/features/user_deletes_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User deletes an apartment' do

@@ -1,0 +1,6 @@
+- fixtures.feature
+- factory_girl.feature
+- fabrication.feature
+- edge_cases.feature
+- options.feature
+- destroy.feature

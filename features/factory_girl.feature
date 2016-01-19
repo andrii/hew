@@ -1,12 +1,14 @@
-Feature: Generate specs with Factory Girl
+Feature: Factory Girl
+
+  Pass the `--test-data` (or `-F`) option with `factory_girl` to generate the specs with factories. Factory Girl needs to be [configured](https://github.com/thoughtbot/factory_girl/blob/master/GETTING_STARTED.md#configure-your-test-suite) in order for strategy methods (e.g. `create`, `build`) to work in the specs.
 
   Background:
-    Given Hew, RSpec Rails, Capybara and Factory Girl are installed
+    Given hew, rspec-rails, capybara and factory_girl_rails are installed
 
-  Scenario: Generate specs with Factory Girl
+  Scenario: Generate specs with factories
     When I run `rails generate hew Apartment full_address:string description:text bedrooms:integer latitude:float longitude:float price:decimal sprinkler_check_at:datetime check_in_at:time available_from:date fireplace:boolean --test-data=factory_girl`
     Then a file named "spec/factories/apartments.rb" should contain exactly:
-      """
+      """ruby
       FactoryGirl.define do
         factory :apartment do
           full_address 'MyString'
@@ -23,7 +25,7 @@ Feature: Generate specs with Factory Girl
       end
       """
     And a file named "spec/features/user_views_apartments_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User views apartments' do
@@ -46,7 +48,7 @@ Feature: Generate specs with Factory Girl
       end
       """
     And a file named "spec/features/user_creates_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User creates an apartment' do
@@ -83,7 +85,7 @@ Feature: Generate specs with Factory Girl
       end
       """
     And a file named "spec/features/user_views_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User views an apartment' do
@@ -108,7 +110,7 @@ Feature: Generate specs with Factory Girl
       end
       """
     And a file named "spec/features/user_updates_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User updates an apartment' do
@@ -147,7 +149,7 @@ Feature: Generate specs with Factory Girl
       end
       """
     And a file named "spec/features/user_deletes_apartment_spec.rb" should contain exactly:
-      """
+      """ruby
       require 'rails_helper'
 
       RSpec.feature 'User deletes an apartment' do

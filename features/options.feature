@@ -4,7 +4,7 @@ Feature: Options
   [Factory Girl](https://github.com/thoughtbot/factory_girl_rails) or [Fabrication](http://www.fabricationgem.org/) libraries. Fixtures is the default.
 
   Background:
-    Given Hew is installed
+    Given hew is installed
 
   Scenario: Without `-F` option
     When I run `rails generate hew User`
